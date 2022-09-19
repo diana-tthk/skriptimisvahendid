@@ -11,19 +11,18 @@
 #-ne tõene, kui n1 ja n2 ei ole võrdsed. Nt. [ n1 -ne n2 ]
 
 function moveFileCreateIfNotExists () {
-read -p "Mis faili? " file
-echo $file
-if [ ! -f $file ]
+if [ ! -f $2 ]
 then 
-    if [ read -p "Kas loon $file? (1/0) " -eq 1 ]
+    read -p "Kas loon $2? (1/0) " check
+    if [ $check -eq 1 ]
     then 
       cd $1 
-      touch $file
+      touch $2
     else
       echo "Bye then!"
       exit 0
     fi
-elif mv $file $1
+elif mv $2 $1
 then 
 echo "Fail on kausta sisse liigutatud"
 else
@@ -43,11 +42,15 @@ mkdir $dir
 fi
 echo "Nüüd saame tõsta looud kausta sisse mingi faili."
 
-read -p "Kas soovid mingi faili kausta sisse liigutada? (1/0)" check
+read -p "Kas soovid mingid failid kausta sisse liigutada? (1/0)" check
 
 if [ $check -eq 1 ]
 then
-  moveFileCreateIfNotExists $dir
+  read -p "Mis failid?" files
+  for file in $files
+  do
+  moveFileCreateIfNotExists $dir $file
+  done
 else
 echo "bye then!"
 exit 0
