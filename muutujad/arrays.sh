@@ -27,3 +27,19 @@ echo "--------"
 echo "Elementide arv: ${#nimed[@]}"
 echo "--------"
 echo "Kõik: ${nimed[@]}"
+echo "--------"
+
+#for tsükkel
+for i in {1..10}; do
+echo "Number: $i"
+done
+echo "--------"
+#sammuga 2
+for i in {1..20..2}; do
+echo "Number: $i"
+done
+echo "--------"
+#for tsükkel massiivi jaoks
+for i in "${nimed[@]}"; do
+echo "Nimi: $i"
+done
