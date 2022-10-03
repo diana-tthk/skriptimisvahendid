@@ -1,0 +1,29 @@
+TORUD/KANALID
+
+Pipes
+ühe käsu väljund suunatakse järgmise käsu sisendisse
+
+käsk1 | käsk2 | käsk3
+
+# ps -ael | grep "$UID" | less
+
+List
+käskude ja kpnveierite hulk
+
+käsk1-1 | käsk1-2;käsk2;käsk3-1 | käsk3-2
+
+Ümbersuunamine
+stdin=0 sisend
+stdout=1 väljund
+stderr=2 veaväljund
+
+Ümbersuunamiseks kasutatakse:
+
+< sisend failist
+> väljund faili (sisu ümberkirjutamisega)
+2> veaväljundi sisu kustutamisega
+>> väljund sisu lisamisega faili lõppu
+
+# date > now.txt
+# rm -rf /tmp/my_tmp_dir > /dev/null 2>&1 ; mkdir /tmp/my_tmp_dir
+
