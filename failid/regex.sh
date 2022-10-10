@@ -28,6 +28,30 @@
 
 #1. Kuvada kõik kasutajad, kelle shell on bin/bash
 #2. kuva kõik read mis algavad 'daemon' sõnada failist /etc/group
-#3. Kuvada kõik read failist, kus ei ole otsitvat sõnat
+#3. Kuvada kõik read failist, kust ei leia otsitvat sõnat
 #4. Tee nimekirja failidest siit kaustast, mis olid muudetud vähem, kui 10 tunni tagasi (kaustad ei loe)
 #5.Kuva kõik konfiguratsioon failid /etc kaustast, kus on nimi sees numbrid
+
+echo "------------"
+echo "------------"
+echo "1."
+grep :/bin/bash$ /etc/passwd
+echo "------------"
+echo "------------"
+echo "2."
+grep ^daemon /etc/group
+echo "------------"
+echo "------------"
+echo "3."
+IFS=$'\n'
+read -p "Sõna, mis peab faili reast puuduma: " word
+grep -wv "$word" test.txt
+echo "------------"
+echo "------------"
+echo "4."
+find . -type f -mmin -600
+echo "------------"
+echo "------------"
+echo "5."
+#echo /etc/*[[:digit:]]*.conf
+find /etc -maxdepth 1 -type f -name "*[[:digit:]]*.conf" 
