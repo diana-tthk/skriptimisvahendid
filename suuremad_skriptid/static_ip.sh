@@ -40,6 +40,14 @@ echo "Error: you need to enter dns-nameserver IP aadress (ex. 192.168.1.1): "
 fi
 read addresses[i]
 done
-
 done
 }
+
+function assign() {
+routerip=${addresses[0]}
+netmask=${addresses[1]}
+static=${addresses[2]}
+dns1=${addresses[3]}
+dns2=${addresses[4]}
+}
+
