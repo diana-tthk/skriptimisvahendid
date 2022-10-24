@@ -78,3 +78,32 @@ EOF
 echo ""
 echo "Your info was saved into $1 file."
 }
+
+function update(){
+echo "Updating primary network interface settings"
+ifdown enp0s3
+ifup enp0s3
+echo "Updating secondary network interface"
+ifdown enp0s8
+ifup enp0s8
+echo "Showing new config"
+echo ""
+ifconfig -a
+}
+
+file="/etc/network/interfaces"
+if [[ ! -f $file ]]; then
+echo ""
+echo "File $file does not exist"
+exit 1
+fi
+
+clear
+checkRights
+echo "Set static IP aadress"
+getInfo
+check
+assign
+echo ""
+writeInterface $file
+update
