@@ -23,7 +23,7 @@ for ((i = 0; i < ${num}; i++)); do
 read -p "Enter the dns-server address (ex. 192.168.1.1): " adresses[x]
 ((x=x+1))
 done
-
+}
 
 function check(){
 for ((i = 0; i < ${#addresses[@]}; i++ )); do
@@ -51,3 +51,30 @@ dns1=${addresses[3]}
 dns2=${addresses[4]}
 }
 
+function writeInterface(){
+cat << EOF > $1
+#This file describes the network interfaces available on your system
+#and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+#The loopback network interface
+auto lo
+iface lo inet loopback
+
+#The primary network interface
+auto enp0s3
+iface enp0s3 inet dhcp
+        dns-nameservers $dns1 $dns2
+
+#Your static network configuration
+auto enp0s8
+iface enp0s8 inet static
+        address $static
+        netmask $netmask
+        gateway $routerip
+EOF
+
+echo ""
+echo "Your info was saved into $1 file."
+}
